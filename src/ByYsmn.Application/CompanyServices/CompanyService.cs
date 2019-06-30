@@ -25,7 +25,9 @@ namespace ByYsmn.Application.CompanyServices
 
         public async Task<List<Company>> GetAll()
         {
-            return await _context.Companies.ToListAsync();
+            return await _context.Companies
+                .Include(x => x.CreatorUser)
+                .Include(x => x.ModifierUser).ToListAsync();
         }
 
         public Task<List<Company>> GetAllByKeyword(string input)

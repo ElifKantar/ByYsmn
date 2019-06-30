@@ -13,7 +13,16 @@ namespace ByYsmn.EntityFramework.Context
         {
 
         }
-        
+
+        // Sqlite geçiş yaparken eklenecek. 
+        // Şimdi ApplicationDbFactoryde DatabaseConnection yazan yere SQLiteConnection yazılacak. 
+        // Startup da değiştirilecek. Sonra Migration silinecek.
+
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            base.OnModelCreating(builder);
+        }
+
         // DbSetler buraya eklenecek. (Veritabanı modelleri)
 
         public DbSet<Company> Companies { get; set; }

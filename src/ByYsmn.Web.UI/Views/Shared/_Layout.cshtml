@@ -34,7 +34,7 @@
                         @if (User.Identity.IsAuthenticated)
                         {
                             <li class="nav-item">
-                                <a class="nav-link text-dark" href="#">Firmalar</a>
+                                <a class="nav-link text-dark" asp-action="Index" asp-controller="Company">Firmalar</a>
                             </li>
                         }
                         <li class="nav-item">
