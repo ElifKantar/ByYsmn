@@ -20,6 +20,6 @@ namespace ByYsmn.Application.Shared
 
         Task<TModel> Update(TUpdateInput input);
 
-        Task<TModel> Delete(EntityInput<TPKey> input );
+        Task<bool> Delete(EntityInput<TPKey> input );
     }
 }

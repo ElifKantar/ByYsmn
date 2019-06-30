@@ -11,25 +11,17 @@ namespace ByYsmn.Core.Shared
 
         [ForeignKey("CreatorUserId")]
         public virtual ApplicationUser CreatorUser { get; set; }
+        public virtual Guid? CreatorUserId { get; set; }
 
-        [Required]
-        public Guid CreatorUserId { get; set; }
-
-        public string ModifierUserId { get; set; }
-
-        public DateTime CreatedDate { get; set; }
-
-        public DateTime ModifiedDate { get; set; }
-
-    }
-
-    public class EntityPlain<T>
-    {
-        public T Id { get; set; }
+        [ForeignKey("ModifierUserId")]
+        public virtual ApplicationUser ModifierUser { get; set; }
+        public virtual Guid? ModifierUserId { get; set; }
 
         public DateTime CreatedDate { get; set; }
 
-        public DateTime ModifiedDate { get; set; }
+        public DateTime? ModifiedDate { get; set; }
 
     }
+
+    
 }

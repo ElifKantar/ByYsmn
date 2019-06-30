@@ -5,6 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\ByYasemen.EntityFramework\ByYsmn.EntityFramework.csproj" />
     <ProjectReference Include="..\ByYsmn.Core\ByYsmn.Core.csproj" />
   </ItemGroup>
 

@@ -5,29 +5,27 @@ using System.Threading.Tasks;
 using ByYsmn.Application.CompanyServices.Dtos;
 using ByYsmn.Application.Shared;
 using ByYsmn.Core.Companies;
+using ByYsmn.EntityFramework.Context;
+using Microsoft.EntityFrameworkCore;
 
 namespace ByYsmn.Application.CompanyServices
 {
     public class CompanyService : ICompanyService
     {
-        public Task<Company> Create(CompanyCreateInput input)
+        private readonly ApplicationDbContext _context;
+        public CompanyService(ApplicationDbContext context)
         {
-            throw new NotImplementedException();
+            _context = context;
         }
 
-        public Task<Company> Delete(EntityInput<Guid> input)
+        public async Task<Company> Get(EntityInput<Guid> input)
         {
-            throw new NotImplementedException();
+            return await _context.Companies.FindAsync(input.Id);
         }
 
-        public Task<Company> Get(EntityInput<Guid> input)
+        public async Task<List<Company>> GetAll()
         {
-            throw new NotImplementedException();
-        }
-
-        public Task<List<Company>> GetAll()
-        {
-            throw new NotImplementedException();
+            return await _context.Companies.ToListAsync();
         }
 
         public Task<List<Company>> GetAllByKeyword(string input)
@@ -40,9 +38,29 @@ namespace ByYsmn.Application.CompanyServices
             throw new NotImplementedException();
         }
 
-        public Task<Company> Update(CompanyUpdateInput input)
+        public async Task<Company> Create(CompanyCreateInput input)
+        {
+            var company = Company.Create(input.Name, input.Tel, input.Address, input.WebSiteUrl, input.Email, input.CreatorUserId);
+            await _context.Companies.AddAsync(company);
+            await _context.SaveChangesAsync();
+            return company;
+        }
+
+        public async Task<Company> Update(CompanyUpdateInput input)
+        {
+            var oldCompany = await Get(new EntityInput<Guid> { Id = input.Id });
+            var updateCompany = Company.Update(oldCompany, input.Name, input.Tel, input.Address, input.WebSiteUrl, input.Email, input.ModifierUserId);
+            _context.Companies.Update(updateCompany);
+            await _context.SaveChangesAsync();
+            return updateCompany;
+        }
+
+        public Task<bool> Delete(EntityInput<Guid> input)
         {
             throw new NotImplementedException();
         }
+
+
+
     }
 }

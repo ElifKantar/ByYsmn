@@ -4,7 +4,8 @@ using System.Text;
 
 namespace ByYsmn.Application.CompanyServices.Dtos
 {
-    public class CompanyUpdateInput
+    public class CompanyUpdateInput : CompanyCreateInput
     {
+        public Guid Id { get; set; }
     }
 }
